@@ -6,7 +6,7 @@ const fs = require('fs');
 var uniqid = require('uniqid');
 
 // GET request: read the 'db.json' file and return the saved notes
-apiRoutes.get('/api/notes', (req, res) => {
+apiRoutes.get('/notes', (req, res) => {
     // Send a message to the client
     res.json(`${req.method} request received to get notes`);
     // Log request to the terminal
@@ -17,7 +17,7 @@ apiRoutes.get('/api/notes', (req, res) => {
 
 // POST request: receive a new notes object with 'title' and 'text' in the 'req.body', 
 // then append the new notes object to the 'db.json' file, and return the new notes object to the client 
-apiRoutes.post('/api/notes', (req, res) => {
+apiRoutes.post('/notes', (req, res) => {
     console.info(`${req.method} request received to add notes`);
     // Destructuring assignment for the items (title and text) in the 'req.body'
     const { title, text } = req.body;
@@ -40,7 +40,7 @@ apiRoutes.post('/api/notes', (req, res) => {
         // res.json(`Notes for ${newNotes.title} have been logged!`);
 
         // import existing notes in English(utf8) format
-        fs.readFile('../db/db.json', 'utf8', (err, data) => {
+        fs.readFile('db/db.json', 'utf8', (err, data) => {
             if (err) {
                 console.error(err);
             } else {
@@ -50,7 +50,7 @@ apiRoutes.post('/api/notes', (req, res) => {
                 parsedNotes.push(newNotes);
                 // Write updated notes back to the file
                 fs.writeFile(
-                    '../db/db.json',
+                    'db/db.json',
                     JSON.stringify(parsedNotes, null, 4),
                     (writeErr) =>
                         writeErr
@@ -65,10 +65,10 @@ apiRoutes.post('/api/notes', (req, res) => {
 });
 
 // DELETE request: should receive a parameter including the id of the selected notes.
-apiRoutes.delete('/api/notes/:id', (req, res) => {
+apiRoutes.delete('/notes/:id', (req, res) => {
     console.info(`${req.method} request received to delete notes`);
     // import existing notes in English(utf8) format
-    fs.readFile('../db/db.json', 'utf8', (err, data) => {
+    fs.readFile('db/db.json', 'utf8', (err, data) => {
         if (err) {
             console.error(err);
         } else {
@@ -77,7 +77,7 @@ apiRoutes.delete('/api/notes/:id', (req, res) => {
             let filterNotes = originNotes.filter(item => item.id !== req.params.id);
             // Write updated notes back to the file
             fs.writeFile(
-                '../db/db.json',
+                'db/db.json',
                 JSON.stringify(filterNotes, null, 4),
                 (writeErr) =>
                     writeErr
