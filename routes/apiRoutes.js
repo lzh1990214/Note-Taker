@@ -8,7 +8,7 @@ var uniqid = require('uniqid');
 // GET request: read the 'db.json' file and return the saved notes
 apiRoutes.get('/notes', (req, res) => {
     // Send a message to the client
-    res.json(`${req.method} request received to get notes`);
+    // res.json(`${req.method} request received to get notes`);
     // Log request to the terminal
     console.info(`${req.method} request received to get notes`);
     // Send all notes to the client
@@ -66,7 +66,7 @@ apiRoutes.post('/notes', (req, res) => {
 
 // DELETE request: should receive a parameter including the id of the selected notes.
 apiRoutes.delete('/notes/:id', (req, res) => {
-    console.info(`${req.method} request received to delete notes`);
+    // console.info(`${req.method} request received to delete notes`);
     // import existing notes in English(utf8) format
     fs.readFile('db/db.json', 'utf8', (err, data) => {
         if (err) {
