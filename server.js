@@ -12,7 +12,7 @@ app.use(express.static('public'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// import HTML and API routes files
+// import HTML and API routes 
 const apiRouter = require('./routes/apiRoutes');
 const htmlRouter = require('./routes/htmlRoutes');
 app.use('/api', apiRouter);

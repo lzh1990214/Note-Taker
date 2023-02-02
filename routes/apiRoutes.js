@@ -2,17 +2,19 @@
 const apiRoutes = require('express').Router();
 const notes = require('../db/db.json');
 const fs = require('fs');
-// generate 18 byte unique id based on the time, process id and mac address
+// dependency to generate 18 byte unique id based on the time, process id and mac address
 var uniqid = require('uniqid');
 
 // GET request: read the 'db.json' file and return the saved notes
 apiRoutes.get('/notes', (req, res) => {
-    // Send a message to the client
-    // res.json(`${req.method} request received to get notes`);
-    // Log request to the terminal
-    console.info(`${req.method} request received to get notes`);
-    // Send all notes to the client
-    return res.json(notes);
+    // read db.json files in a synchronous way and
+    // import existing notes from db.json and convert to JSON
+    let data = JSON.parse(fs.readFileSync("db/db.json", 'utf-8'));
+    // Log GET request to the terminal
+    console.info(`${req.method} request received to get notes:`);
+    console.log(JSON.stringify(data));
+    // Send response with the current notes in db.json
+    res.json(data);
 });
 
 // POST request: receive a new notes object with 'title' and 'text' in the 'req.body', 
@@ -37,7 +39,6 @@ apiRoutes.post('/notes', (req, res) => {
         };
         console.log(response);
         res.status(201).json(response);
-        // res.json(`Notes for ${newNotes.title} have been logged!`);
 
         // import existing notes in English(utf8) format
         fs.readFile('db/db.json', 'utf8', (err, data) => {
@@ -66,27 +67,14 @@ apiRoutes.post('/notes', (req, res) => {
 
 // DELETE request: should receive a parameter including the id of the selected notes.
 apiRoutes.delete('/notes/:id', (req, res) => {
-    // console.info(`${req.method} request received to delete notes`);
-    // import existing notes in English(utf8) format
-    fs.readFile('db/db.json', 'utf8', (err, data) => {
-        if (err) {
-            console.error(err);
-        } else {
-            // Convert string data into JSON object
-            let originNotes = JSON.parse(data);
-            let filterNotes = originNotes.filter(item => item.id !== req.params.id);
-            // Write updated notes back to the file
-            fs.writeFile(
-                'db/db.json',
-                JSON.stringify(filterNotes, null, 4),
-                (writeErr) =>
-                    writeErr
-                        ? console.error(writeErr)
-                        : console.info('Successfully deleted your notes!')
-            );
-            res.json(filterNotes);
-        };
-    });
+    // import existing notes from db.json and convert to JSON
+    let currentNotes = JSON.parse(fs.readFileSync('db/db.json', 'utf-8'))
+    // filtering notes with the selected id by filter() function
+    let filterNotes = currentNotes.filter(item => item.id !== req.params.id);
+    // rewriting filtered note to db.json after the delete request
+    fs.writeFileSync('db/db.json', JSON.stringify(filterNotes));
+    res.json(filterNotes);
+
 })
 
 module.exports = apiRoutes;
