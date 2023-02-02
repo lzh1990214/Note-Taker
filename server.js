@@ -3,7 +3,7 @@ const express = require('express');
 
 // assign express() function to a new variable name: app
 const app = express();
-const PORT = 3001;
+const PORT = process.env.PORT || 3001;
 
 // middleware to make 'public' folder static and accessible to front-end users
 app.use(express.static('public'));
