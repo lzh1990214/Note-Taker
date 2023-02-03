@@ -58,18 +58,17 @@ https://github.com/lzh1990214
 
 ### Email
 zli02@alumni.risd.edu
-seanlee900214@gmail.com
 
 
 ## Screenshots <a id="Screenshots"></a>
 
 ### Main page
-![main page](./assets/img/index%20page.png)
+![main page](./public/assets/img/index-page.png)
 
 ### Add notes
-![add notes](./assets/img/add%20notes.png)
+![add notes](./public/assets/img/add-notes.png)
 
 ### Delete notes
-![delete notes](./assets/img/delete%20notes.png)
+![delete notes](./public/assets/img/delete-notes.png)
 
 
