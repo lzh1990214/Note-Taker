@@ -25,7 +25,7 @@ The project is to create an application that can be used to write and save notes
 1. Opening an external ternimal from the repository
 2. Run the backend server locally with command: `npm start`
 3. Access the application by `http://localhost:3001` in a web broswer on the local server
-4. Access deployed application on Heroku through URL: 
+4. Deployed application on Heroku: https://note-taker-zl.herokuapp.com/
 
 
 ## Contributing <a id="Contributing"></a>
@@ -55,12 +55,21 @@ N/A
 
 ### Github
 https://github.com/lzh1990214
+
 ### Email
 zli02@alumni.risd.edu
+seanlee900214@gmail.com
 
 
 ## Screenshots <a id="Screenshots"></a>
 
+### Main page
+![main page](./assets/img/index%20page.png)
 
+### Add notes
+![add notes](./assets/img/add%20notes.png)
+
+### Delete notes
+![delete notes](./assets/img/delete%20notes.png)
 
 
